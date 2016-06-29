@@ -1,6 +1,6 @@
 /*
-	Guillermo Fern·ndez.	CI: V-23.751.818
-	Alexandra S·nchez.		CI: V-26.239.664
+	Guillermo Fern√°ndez.	CI: V-23.751.818
+	Alexandra S√°nchez.	CI: V-26.239.664
 */
 
 #include <iostream>
@@ -49,7 +49,7 @@ int main() {
 	ifstream first;
 	first.open("cache");
 	if (!first.is_open()) {
-		// cache no existe, se crear· al final
+		// cache no existe, se crear√° al final
 		heading();
 		cout << endl;
 		cout << "\tPor favor, ajuste el ancho de la ventana de la consola a 122 para" << endl;
@@ -61,7 +61,7 @@ int main() {
 		last.close();
 		system("pause");
 	} else {
-		// cachÈ sÌ existe
+		// cach√© s√≠ existe
 		first.close();
 	}
 	int n;
@@ -108,7 +108,7 @@ int main() {
 	int product1[n][12];																			// uncomment when finished
 	string meses[12] = 		{"Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"};
 	string mesesFull[12] = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-							"Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+				"Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
 	
 	do {
 		system("cls");
@@ -146,12 +146,12 @@ int main() {
 				tEarn.clear();
 				
 				/* stringstream vars */
-					streamSrvc.str("");
-					streamTax.str("");
-					streamEmpl.str("");
-					streamTotal.str("");
-					streamSpend.str("");
-					streamEarn.str("");
+				streamSrvc.str("");
+				streamTax.str("");
+				streamEmpl.str("");
+				streamTotal.str("");
+				streamSpend.str("");
+				streamEarn.str("");
 				
 				// n*12 matrices
 				for (i=0; i<n; i++) {
@@ -162,11 +162,11 @@ int main() {
 				
 				// 12 arrays
 				for (i=0; i<12; i++) {
-						totalMes[i] = 0;
-						totalPrcnt2[i] = 0;
-						mostSoldMonth[i] = 0;
-						mostSoldName[i] = 0;
-						mostSoldQty[i] = 0;
+					totalMes[i] = 0;
+					totalPrcnt2[i] = 0;
+					mostSoldMonth[i] = 0;
+					mostSoldName[i] = 0;
+					mostSoldQty[i] = 0;
 				}
 				
 				// n arrays
@@ -227,16 +227,16 @@ int main() {
 					}
 				}
 				cout << "]" << endl;
-				/* procesando c·lculos */
+				/* procesando c√°lculos */
 				// totales
-				for (i=0; i<12; i++) {																// venta total de cada producto en todo el aÒo
+				for (i=0; i<12; i++) {																// venta total de cada producto en todo el a√±o
 					for (j=0; j<n; j++) {
 						totalProducto[j] += product1[j][i];
 					}
 				}
 				for (i=0; i<n; i++) {																
 					for (j=0; j<12; j++) {
-						if (highAmount == 0) {														// busqueda de producto m·s vendido en todo el aÒo
+						if (highAmount == 0) {														// busqueda de producto m√°s vendido en todo el a√±o
 							highAmount = product1[i][j];
 							highMonth = j;
 							highName = i;
@@ -253,7 +253,7 @@ int main() {
 						totalMes[j] += product1[i][j];												// ventas totales en cada mez
 					}
 				}
-				for (i=0; i<12; i++) {																// b˙squeda de producto m·s vendido en cada mes
+				for (i=0; i<12; i++) {																// b√∫squeda de producto m√°s vendido en cada mes
 					highMonth2 = 0;
 					highName2= 0;
 					highAmount2 = 0;
@@ -308,12 +308,12 @@ int main() {
 					}
 					totalPrcnt2[i] = acum88;
 				}
-				for (i=0; i<n; i++) {																// proceso de asignaciÛn de precios a
+				for (i=0; i<n; i++) {																// proceso de asignaci√≥n de precios a
 					precios[i] = neto;																// cada producto, tomando en cuenta que
 				}																					// el precio del primer producto es x,
 				for (i=1; i<n; i++) {																// el del segundo es x+3, el del tercero
 					acum3 = acum3+3;																// es x+(2*3), el del cuarto es x+(3*3)
-					precios[i] += acum3;															// y asÌ sucesivamente. [x+(n*3)]
+					precios[i] += acum3;															// y as√≠ sucesivamente. [x+(n*3)]
 				}
 				for (i=0; i<n; i++) {
 					moneyMadeProd[i] = precios[i] * totalProducto[i];								// +dinero producido por cada producto
