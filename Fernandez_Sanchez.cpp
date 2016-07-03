@@ -1,6 +1,6 @@
 /*
-	Guillermo Fern√°ndez.	CI: V-23.751.818
-	Alexandra S√°nchez.	CI: V-26.239.664
+	Guillermo Fern·ndez.	CI: V-23.751.818
+	Alexandra S·nchez.		CI: V-26.239.664
 */
 
 #include <iostream>
@@ -9,6 +9,7 @@
 #include <string>
 #include <sstream>
 #include <fstream>
+#include <limits>
 
 namespace patch {
     template < typename T > std::string to_string(const T& n) {
@@ -49,7 +50,7 @@ int main() {
 	ifstream first;
 	first.open("cache");
 	if (!first.is_open()) {
-		// cache no existe, se crear√° al final
+		// cache no existe, se crear· al final
 		heading();
 		cout << endl;
 		cout << "\tPor favor, ajuste el ancho de la ventana de la consola a 122 para" << endl;
@@ -61,17 +62,22 @@ int main() {
 		last.close();
 		system("pause");
 	} else {
-		// cach√© s√≠ existe
+		// cachÈ sÌ existe
 		first.close();
 	}
 	int n;
 	system("cls");
 	heading();
 	cout << "\tIngrese la cantidad de productos distribuidos = ";
-	cin >> n;
+	while (!(std::cin >> n) || n < 0) {
+		cout << "\tError. Intente de nuevo = ";
+		cin >> n;
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	}
 	// var declaration
 	int optn, j, i, acum3, highAmount, highMonth, highName, highAmount2, highMonth2, highName2, totalVentasAno, totalVentasMes, decs;
-	double neto, moneyIn, moneyOut, moneyOutSrvc, moneyMadeTotal, moneyOutTax, moneyOutPay, totalPrcnt1, acum88;
+	double neto, moneyIn, moneyOut, moneyOutSrvc, moneyMadeTotal, moneyOutTax, moneyOutPay, totalPrcnt1, totalPrcnt4;
 	bool aux = false;
 	// string declaration
 	string srvcPay;
@@ -99,16 +105,15 @@ int main() {
 	double moneyMadeProd[n];
 	double prcntYearSalesPrdct[n];
 	double prcntMonthSalesPrdct[n];
-	double percentv2[n][12];
+	double percentv4[12];
 	double totalMes[12];
-	double totalPrcnt2[12];
 	int mostSoldMonth[12];
 	int mostSoldName[12];
 	int mostSoldQty[12];
 	int product1[n][12];																			// uncomment when finished
 	string meses[12] = 		{"Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"};
 	string mesesFull[12] = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-				"Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+							"Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
 	
 	do {
 		system("cls");
@@ -135,7 +140,7 @@ int main() {
 				/* int vars */
 				i = j = acum3 = highAmount = highMonth = highName = highAmount2 = highMonth2 = highName2 = totalVentasAno = totalVentasMes = 0;
 				/* float vars*/
-				neto = moneyIn = moneyOut = moneyOutSrvc = moneyMadeTotal = moneyOutTax = moneyOutPay = totalPrcnt1 = acum88 = 0;
+				neto = moneyIn = moneyOut = moneyOutSrvc = moneyMadeTotal = moneyOutTax = moneyOutPay = totalPrcnt1 = totalPrcnt4 = 0;
 				
 				/* string vars */
 				srvcPay.clear();
@@ -146,27 +151,20 @@ int main() {
 				tEarn.clear();
 				
 				/* stringstream vars */
-				streamSrvc.str("");
-				streamTax.str("");
-				streamEmpl.str("");
-				streamTotal.str("");
-				streamSpend.str("");
-				streamEarn.str("");
-				
-				// n*12 matrices
-				for (i=0; i<n; i++) {
-					for (j=0; j<12; j++) {
-						percentv2[i][j] = 0;
-					}
-				}
+					streamSrvc.str("");
+					streamTax.str("");
+					streamEmpl.str("");
+					streamTotal.str("");
+					streamSpend.str("");
+					streamEarn.str("");
 				
 				// 12 arrays
 				for (i=0; i<12; i++) {
-					totalMes[i] = 0;
-					totalPrcnt2[i] = 0;
-					mostSoldMonth[i] = 0;
-					mostSoldName[i] = 0;
-					mostSoldQty[i] = 0;
+						totalMes[i] = 0;
+						mostSoldMonth[i] = 0;
+						mostSoldName[i] = 0;
+						mostSoldQty[i] = 0;
+						percentv4[i] = 0;
 				}
 				
 				// n arrays
@@ -198,7 +196,13 @@ int main() {
 					cin >> productName[i];
 					for (j=0; j<12; j++) {
 						cout << "\tIngrese las ventas de " << productName[i] << " del mes de " << mesesFull[j] << " = ";
-						cin >> product1[i][j];														// asign. de celdas de main matrix (product1[n][12])
+						//cin >> ;														// asign. de celdas de main matrix (product1[n][12])
+						while (!(std::cin >> product1[i][j]) || product1[i][j] < 0) {
+							cout << "\tError. Intente de nuevo = ";
+							cin >> product1[i][j];
+							cin.clear();
+							cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						}
 						cout << endl;
 					}
 				}
@@ -212,6 +216,13 @@ int main() {
 				cout << "\tNota: El precio que ingrese se le asignar\240 al primer producto." << endl;
 				cout << "\t      El precio de los dem\240s ir\240 aumentando de 3 en 3." << endl << endl;
 				cout << "\tIngrese el precio del primer producto = \44";
+				while (!(std::cin >> neto) || neto < 0) {
+					cout << "\tError. Intente de nuevo = ";
+					cin >> neto;
+					cin.clear();
+					cin.ignore(numeric_limits<streamsize>::max(), '\n');
+				}
+				
 				cin >> neto;
 				cout << endl << "------------------------------------------------------------------------------------------------------------------------" << endl << endl;
 				cout << "Datos de precios completados . . ." << endl;
@@ -227,16 +238,16 @@ int main() {
 					}
 				}
 				cout << "]" << endl;
-				/* procesando c√°lculos */
+				/* procesando c·lculos */
 				// totales
-				for (i=0; i<12; i++) {																// venta total de cada producto en todo el a√±o
+				for (i=0; i<12; i++) {																// venta total de cada producto en todo el aÒo
 					for (j=0; j<n; j++) {
 						totalProducto[j] += product1[j][i];
 					}
 				}
 				for (i=0; i<n; i++) {																
 					for (j=0; j<12; j++) {
-						if (highAmount == 0) {														// busqueda de producto m√°s vendido en todo el a√±o
+						if (highAmount == 0) {														// busqueda de producto m·s vendido en todo el aÒo
 							highAmount = product1[i][j];
 							highMonth = j;
 							highName = i;
@@ -250,10 +261,10 @@ int main() {
 				}
 				for (i=0; i<n; i++) {
 					for (j=0; j<12; j++) {
-						totalMes[j] += product1[i][j];												// ventas totales en cada mez
+						totalMes[j] += product1[i][j];												// ventas totales en cada meS
 					}
 				}
-				for (i=0; i<12; i++) {																// b√∫squeda de producto m√°s vendido en cada mes
+				for (i=0; i<12; i++) {																// b˙squeda de producto m·s vendido en cada mes
 					highMonth2 = 0;
 					highName2= 0;
 					highAmount2 = 0;
@@ -291,29 +302,19 @@ int main() {
 				for (i=0; i<n; i++) {
 					totalPrcnt1 += prcntYearSalesPrdct[i];
 				}
-				/* v2 */
-				for (i=0; i<n; i++) {
-					for (j=0; j<12; j++){
-						if (product1[i][j] == 0) {
-							percentv2[i][j] == 0;
-						} else {
-							percentv2[i][j] = product1[i][j] / totalMes[j] * 100;
-						}
-					}
+				/* v4 */
+				for (i=0; i<12; i++) {
+					percentv4[i] = totalMes[i] / totalVentasAno * 100;
 				}
 				for (i=0; i<12; i++) {
-					acum88 = 0;
-					for (j=0; j<n; j++) {
-						acum88 += percentv2[j][i];
-					}
-					totalPrcnt2[i] = acum88;
+					totalPrcnt4 += percentv4[i];
 				}
-				for (i=0; i<n; i++) {																// proceso de asignaci√≥n de precios a
+				for (i=0; i<n; i++) {																// proceso de asignaciÛn de precios a
 					precios[i] = neto;																// cada producto, tomando en cuenta que
 				}																					// el precio del primer producto es x,
 				for (i=1; i<n; i++) {																// el del segundo es x+3, el del tercero
 					acum3 = acum3+3;																// es x+(2*3), el del cuarto es x+(3*3)
-					precios[i] += acum3;															// y as√≠ sucesivamente. [x+(n*3)]
+					precios[i] += acum3;															// y asÌ sucesivamente. [x+(n*3)]
 				}
 				for (i=0; i<n; i++) {
 					moneyMadeProd[i] = precios[i] * totalProducto[i];								// +dinero producido por cada producto
@@ -391,7 +392,7 @@ int main() {
 			case 4:
 				system("cls");
 				heading();
-				trunc[0] = "NA";
+				trunc[0] = "N/A";
 				if (aux) {
 					for (i=0; i<n; i++) {
 						productName2[i].resize(5);
@@ -452,23 +453,15 @@ int main() {
 				heading();
 				if (aux) {
 					cout << "|\t\t\t\t\tPorcentaje de productos vendido por cada mes:\t\t\t\t\t       |" << endl;
-					cout << "|----------------------------------------------------------------------------------------------------------------------|" << endl;
-					cout << "       " << right;
+					cout << "|----------------------------------------------------------------------------------------------------------------------|" << endl << " ";
 					for (i=0; i<12; i++) {
-						cout << setw(6) << "| "  << meses[i];
+						cout << left << setw(7) << meses[i] << "| ";
 					}
-					cout << "    |" << endl;
-					for (i=0; i<n; i++) {
-						cout << setw(11) << left << productName[i] <<"|";
-						for (j=0; j<12; j++){
-							cout << right << setw(6) << fixed << setprecision(2) << percentv2[i][j] << "% |";
-						}
-						cout << endl;
-					}
-					cout << "Totales(\45) |";
+					cout << "Total  |" << endl;
 					for (i=0; i<12; i++) {
-						cout << setw(6) << fixed << setprecision(2) << totalPrcnt2[i] << "% |";
+						cout << right << setw(6) << fixed << setprecision(2) << percentv4[i] << "% |";
 					}
+					cout << setw(6) << fixed << setprecision(2) << totalPrcnt4 << "% |" << endl;
 					cout << endl;
 					cout << "------------------------------------------------------------------------------------------------------------------------" << endl << endl;
 					cout << left;
